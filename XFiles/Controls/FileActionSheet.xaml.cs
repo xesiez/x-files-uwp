@@ -28,6 +28,7 @@ namespace XFiles.Controls
         Refresh,
         Edit,
         Share,
+        RemoteTransfer,
         AddToFavorites,
         RemoveFromFavorites,
         UploadFile,
@@ -198,6 +199,14 @@ namespace XFiles.Controls
                     Action = FileAction.Refresh,
                     Label = "Refresh",
                     IconPath = IconBase + ActionRefresh,
+                    LabelBrush = accent
+                });
+
+                actions.Add(new ActionItem
+                {
+                    Action = FileAction.RemoteTransfer,
+                    Label = "Remote Transfer (Phone QR)",
+                    IconPath = IconBase + ActionShare,
                     LabelBrush = accent
                 });
 
@@ -475,6 +484,14 @@ namespace XFiles.Controls
                     Action = FileAction.CreateFolder,
                     Label = "New Folder",
                     IconPath = IconBase + ActionCreateFolder,
+                    LabelBrush = accent
+                });
+
+                actions.Add(new ActionItem
+                {
+                    Action = FileAction.RemoteTransfer,
+                    Label = "Remote Transfer (Phone QR)",
+                    IconPath = IconBase + ActionShare,
                     LabelBrush = accent
                 });
 

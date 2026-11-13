@@ -399,6 +399,9 @@ namespace XFiles.Controls
                     case FileAction.Share:
                         await HandleShareAsync(entry);
                         break;
+                    case FileAction.RemoteTransfer:
+                        ShowRemoteTransferDialog(entry);
+                        break;
                     case FileAction.AddToFavorites:
                         await AddFavoriteAsync(entry.Name, entry.FullPath, entry.IsDirectory);
                         break;
@@ -3659,6 +3662,35 @@ namespace XFiles.Controls
 
             Log.Warn("HandleDownloadFromUrlAsync: failed — {Error}", result.Error ?? "unknown");
             _ = AlertDialogControl.ShowAsync($"Download failed.\n\n{result.Error ?? "See the log for details."}", AlertType.Error);
+        }
+
+        private void ShowRemoteTransferDialog(FileEntry entry)
+        {
+            string targetDir = null;
+            if (entry != null && entry.IsDirectory && !entry.IsNetwork && !entry.IsPortal && !string.IsNullOrEmpty(entry.FullPath) && Directory.Exists(entry.FullPath))
+            {
+                targetDir = entry.FullPath;
+            }
+            else if (_navigator.Current != null && !_navigator.Current.IsNetwork && !_navigator.Current.IsPortal && !string.IsNullOrEmpty(_navigator.Current.Path) && Directory.Exists(_navigator.Current.Path))
+            {
+                targetDir = _navigator.Current.Path;
+            }
+
+            if (string.IsNullOrEmpty(targetDir))
+            {
+                targetDir = MoveDialogInitialPath();
+            }
+
+            Log.Info("ShowRemoteTransferDialog targeting {Dir}", targetDir);
+            RemoteTransferOverlay.FileTransferCompleted -= OnRemoteFileTransferCompleted;
+            RemoteTransferOverlay.FileTransferCompleted += OnRemoteFileTransferCompleted;
+            RemoteTransferOverlay.Show(targetDir);
+        }
+
+        private void OnRemoteFileTransferCompleted(string savedPath)
+        {
+            Log.Info("Remote transfer completed: {Path} -> refreshing directory", savedPath);
+            OnRefresh();
         }
     }
 }
