@@ -2056,4 +2056,5 @@
         <controls:ControlsGuideOverlay x:Name="ControlsGuideControl" />
 
     </Grid>
+        <controls:RemoteTransferDialog x:Name="RemoteTransferOverlay" Canvas.ZIndex="550" />
 </Page>
