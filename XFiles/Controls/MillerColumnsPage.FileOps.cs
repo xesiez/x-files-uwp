@@ -3663,7 +3663,6 @@ namespace XFiles.Controls
             Log.Warn("HandleDownloadFromUrlAsync: failed — {Error}", result.Error ?? "unknown");
             _ = AlertDialogControl.ShowAsync($"Download failed.\n\n{result.Error ?? "See the log for details."}", AlertType.Error);
         }
-    }
 
         private void ShowRemoteTransferDialog(FileEntry entry)
         {
