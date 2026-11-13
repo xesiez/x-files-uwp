@@ -1,0 +1,147 @@
+<UserControl
+    x:Class="XFiles.Controls.RemoteTransferDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Visibility="Collapsed">
+
+    <Grid x:Name="Overlay" Background="#E60A0C10" Tapped="OnOverlayTapped">
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+                Background="{StaticResource XFilesSurfaceBrush}"
+                BorderBrush="{StaticResource XFilesBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="10"
+                Padding="32,28"
+                MaxWidth="860"
+                MinWidth="720">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Title Header -->
+                <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                    <TextBlock Text="REMOTE TRANSFER HUB"
+                               FontFamily="ms-appx:///Assets/Fonts/Oxanium-Bold.ttf#Oxanium"
+                               FontSize="18"
+                               Foreground="{StaticResource XFilesAccentBrush}" />
+                    <TextBlock Text="Send download links or upload files directly from your phone or PC"
+                               FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
+                               FontSize="12"
+                               Foreground="{StaticResource XFilesTextDimBrush}"
+                               Margin="0,3,0,0" />
+                </StackPanel>
+
+                <Border Grid.Row="1" Background="{StaticResource XFilesBorderBrush}" Height="1" Margin="0,0,0,20" />
+
+                <!-- Main Content (QR + Instructions & Live Status) -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- QR Code Frame -->
+                    <Border Grid.Column="0"
+                            Background="#FFFFFF"
+                            BorderBrush="{StaticResource XFilesBorderBrush}"
+                            BorderThickness="4"
+                            CornerRadius="8"
+                            Padding="8"
+                            Width="256" Height="256"
+                            HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Image x:Name="QrImage"
+                               Stretch="Uniform"
+                               Width="240" Height="240" />
+                    </Border>
+
+                    <!-- Details & Live Progress -->
+                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                        <!-- Step 1: Scan / URL -->
+                        <TextBlock Text="1. Scan QR code or open in browser:"
+                                   FontFamily="ms-appx:///Assets/Fonts/Oxanium-Bold.ttf#Oxanium"
+                                   FontSize="13" Foreground="#E0E0E0" />
+
+                        <Border Background="{StaticResource XFilesCardBgBrush}"
+                                BorderBrush="{StaticResource XFilesBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="12,8"
+                                Margin="0,6,0,14">
+                            <TextBlock x:Name="ServerUrlText"
+                                       Text="http://192.168.1.xxx:8088"
+                                       FontFamily="Consolas"
+                                       FontSize="15"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource XFilesAccentBrush}" />
+                        </Border>
+
+                        <!-- Step 2: Target Folder -->
+                        <TextBlock Text="2. Destination Folder on Xbox:"
+                                   FontFamily="ms-appx:///Assets/Fonts/Oxanium-Bold.ttf#Oxanium"
+                                   FontSize="13" Foreground="#E0E0E0" />
+
+                        <TextBlock x:Name="TargetFolderText"
+                                   Text="D:\Downloads"
+                                   FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
+                                   FontSize="12"
+                                   Foreground="{StaticResource XFilesTextDimBrush}"
+                                   TextTrimming="CharacterEllipsis"
+                                   Margin="0,4,0,16" />
+
+                        <!-- Live Status & Activity Box -->
+                        <Border Background="{StaticResource XFilesCardBgBrush}"
+                                BorderBrush="{StaticResource XFilesBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="14,12"
+                                Margin="0,0,0,8">
+                            <StackPanel>
+                                <TextBlock x:Name="StatusLabelText"
+                                           Text="● Server active — waiting for phone..."
+                                           FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
+                                           FontSize="13"
+                                           Foreground="#85E868" />
+
+                                <ProgressBar x:Name="ActivityProgressBar"
+                                             Height="6"
+                                             Minimum="0" Maximum="100"
+                                             Value="0"
+                                             Visibility="Collapsed"
+                                             Foreground="{StaticResource XFilesAccentBrush}"
+                                             Margin="0,10,0,4" />
+
+                                <TextBlock x:Name="ActivityDetailText"
+                                           Text=""
+                                           FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
+                                           FontSize="11"
+                                           Foreground="{StaticResource XFilesTextDimBrush}"
+                                           Visibility="Collapsed" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Footer Gamepad Hints -->
+                <StackPanel Grid.Row="3"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                        <Image Source="ms-appx:///Assets/GamepadButtons/abxy/b.png"
+                               Width="20" Height="20" Margin="0,0,6,0"
+                               VerticalAlignment="Center" />
+                        <TextBlock Text="Close &amp; Stop Server"
+                                   FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
+                                   FontSize="13" Foreground="{StaticResource XFilesTextMutedBrush}"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
