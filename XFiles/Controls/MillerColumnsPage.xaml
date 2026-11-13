@@ -597,8 +597,7 @@
                             <Border Background="#1A2230" CornerRadius="8"
                                     BorderBrush="#2A3240" BorderThickness="1">
                                 <Grid>
-                                    <!-- System icon placeholder (default) -->
-                                    <Image x:Name="RomSystemIcon"
+                                    <!-- System icon placeholder (default) -->                                    <Image x:Name="RomSystemIcon"
                                            Width="128" Height="128"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
@@ -1197,8 +1196,7 @@
                 <!-- Y -->
                 <StackPanel Orientation="Horizontal" Margin="0,0,14,0">
                     <Image Source="ms-appx:///Assets/GamepadButtons/abxy/y.png"
-                           Width="18" Height="18" Margin="0,0,4,0"
-                           VerticalAlignment="Center" />
+                           Width="18" Height="18" Margin="0,0,4,0"                           VerticalAlignment="Center" />
                     <TextBlock x:Name="FooterYLabel"
                                Text="Menu"
                                FontFamily="ms-appx:///Assets/Fonts/Oxanium-Regular.ttf#Oxanium"
@@ -1797,8 +1795,7 @@
 
                     <!-- Right: links, inspirations, acknowledgements -->
                     <StackPanel Grid.Column="2" Grid.Row="0"
-                                VerticalAlignment="Center" Margin="28,20,28,14">
-                        <!-- Links -->
+                                VerticalAlignment="Center" Margin="28,20,28,14">                        <!-- Links -->
                         <TextBlock Text="PROJECT"
                                    FontFamily="ms-appx:///Assets/Fonts/Oxanium-Bold.ttf#Oxanium"
                                    FontSize="10" Foreground="#55FFFFFF"
@@ -2055,6 +2052,6 @@
         <!-- Controls guide overlay (fullscreen) -->
         <controls:ControlsGuideOverlay x:Name="ControlsGuideControl" />
 
-    </Grid>
         <controls:RemoteTransferDialog x:Name="RemoteTransferOverlay" Canvas.ZIndex="550" />
+    </Grid>
 </Page>
