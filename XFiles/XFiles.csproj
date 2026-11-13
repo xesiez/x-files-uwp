@@ -173,6 +173,8 @@
     <Compile Include="Controls\ColumnListView.xaml.cs">
       <DependentUpon>ColumnListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RemoteTransferDialog.xaml.cs"><DependentUpon>RemoteTransferDialog.xaml</DependentUpon></Compile>
+    <Compile Include="Services\RemoteTransferServer.cs" />
     <Compile Include="Controls\MillerColumnsPage.xaml.cs">
       <DependentUpon>MillerColumnsPage.xaml</DependentUpon>
     </Compile>
@@ -379,6 +381,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\RemoteTransferDialog.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
     <Page Include="Controls\MillerColumnsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
